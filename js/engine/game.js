@@ -331,7 +331,8 @@ export class Game {
                     ctx.fillStyle = '#FFF';
                     ctx.fillText(`Final Score: ${this.finalScore}`, CANVAS_WIDTH / 2, CANVAS_HEIGHT - 50);
                     if (Math.floor(this.popup.timer * 2) % 2 === 0) {
-                        ctx.fillText('Press SPACE to continue', CANVAS_WIDTH / 2, CANVAS_HEIGHT - 30);
+                        const contMsg = input.isTouchDevice ? 'Tap to continue' : 'Press SPACE to continue';
+                        ctx.fillText(contMsg, CANVAS_WIDTH / 2, CANVAS_HEIGHT - 30);
                     }
                     ctx.restore();
                 }
@@ -386,17 +387,21 @@ export class Game {
         ctx.font = '28px "Press Start 2P", monospace';
         ctx.fillText('Adventure', CANVAS_WIDTH / 2, 180);
 
-        // Blinking "Press SPACE"
+        // Blinking "Press SPACE" / "Tap to Start"
         if (Math.floor(this.menuTimer * 2) % 2 === 0) {
             ctx.font = '11px "Press Start 2P", monospace';
             ctx.fillStyle = '#FFF';
-            ctx.fillText('Press SPACE to Start', CANVAS_WIDTH / 2, 280);
+            const startMsg = input.isTouchDevice ? 'Tap to Start' : 'Press SPACE to Start';
+            ctx.fillText(startMsg, CANVAS_WIDTH / 2, 280);
         }
 
         // Controls hint
         ctx.font = '8px "Press Start 2P", monospace';
         ctx.fillStyle = '#FFF';
-        ctx.fillText('← → to Move    SPACE to Jump', CANVAS_WIDTH / 2, 330);
+        const ctrlMsg = input.isTouchDevice
+            ? 'Use on-screen buttons to play'
+            : '← → to Move    SPACE to Jump';
+        ctx.fillText(ctrlMsg, CANVAS_WIDTH / 2, 330);
     }
 
     drawWorld(ctx) {
@@ -461,7 +466,8 @@ export class Game {
 
         ctx.font = '11px "Press Start 2P", monospace';
         ctx.fillStyle = '#FFF';
-        ctx.fillText('Press SPACE to Retry', CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 + 60);
+        const retryMsg = input.isTouchDevice ? 'Tap to Retry' : 'Press SPACE to Retry';
+        ctx.fillText(retryMsg, CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 + 60);
     }
 
     drawLeaderboard(ctx) {
@@ -532,7 +538,8 @@ export class Game {
         ctx.font = '9px "Press Start 2P", monospace';
         ctx.fillStyle = '#AAA';
         if (Math.floor(performance.now() / 500) % 2 === 0) {
-            ctx.fillText('Press SPACE to Play Again', CANVAS_WIDTH / 2, CANVAS_HEIGHT - 50);
+            const againMsg = input.isTouchDevice ? 'Tap to Play Again' : 'Press SPACE to Play Again';
+            ctx.fillText(againMsg, CANVAS_WIDTH / 2, CANVAS_HEIGHT - 50);
         }
 
         ctx.restore();

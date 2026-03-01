@@ -2,14 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#1a1a2e">
     <title>Sophie's Adventure</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <canvas id="game" width="800" height="450"></canvas>
+    <div id="game-container">
+        <canvas id="game" width="800" height="450"></canvas>
+
+        <!-- Mobile touch controls (hidden on desktop, shown on touch devices) -->
+        <div id="touch-controls">
+            <!-- Left side: directional buttons -->
+            <div class="touch-left">
+                <button class="touch-btn touch-btn-left" id="btn-left" aria-label="Move Left">◀</button>
+                <button class="touch-btn touch-btn-right" id="btn-right" aria-label="Move Right">▶</button>
+            </div>
+            <!-- Right side: jump button -->
+            <div class="touch-right">
+                <button class="touch-btn touch-btn-jump" id="btn-jump" aria-label="Jump">▲</button>
+            </div>
+        </div>
+    </div>
     <script type="module" src="js/main.js"></script>
 </body>
 </html>
