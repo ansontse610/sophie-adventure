@@ -8,7 +8,7 @@ export class Popup {
         this.active = false;
         this.timer = 0;
         this.balloonY = CANVAS_HEIGHT + 60; // starts below screen
-        this.balloonTargetY = 120;
+        this.balloonTargetY = 180;
         this.confetti = [];
         this.textScale = 0;
     }

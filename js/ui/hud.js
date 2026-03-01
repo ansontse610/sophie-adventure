@@ -42,14 +42,15 @@ export class HUD {
         // Font setup
         ctx.font = '12px "Press Start 2P", monospace';
         ctx.textBaseline = 'top';
+        ctx.textAlign = 'left';
 
-        // ── Lives ──
+        // ── Lives (top-left) ──
         ctx.fillStyle = COLORS.hudShadow;
-        ctx.fillText(`♥ × ${player.lives}`, 17, 17);
+        ctx.fillText(`Life x ${player.lives}`, 17, 17);
         ctx.fillStyle = '#FF69B4';
-        ctx.fillText(`♥ × ${player.lives}`, 16, 16);
+        ctx.fillText(`Life x ${player.lives}`, 16, 16);
 
-        // ── Score ──
+        // ── Score (below lives) ──
         const scoreText = `Score: ${this.score}`;
         ctx.fillStyle = COLORS.hudShadow;
         ctx.fillText(scoreText, 17, 37);

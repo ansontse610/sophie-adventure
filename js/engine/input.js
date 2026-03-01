@@ -25,6 +25,7 @@ class Input {
 
         // ── Touch Controls ──
         this.isTouchDevice = false;
+        this.playing = false; // true only during active gameplay
         this._initTouch();
     }
 
@@ -96,13 +97,13 @@ class Input {
             btn.addEventListener('contextmenu', (e) => e.preventDefault());
         });
 
-        // Also allow tapping the canvas itself as "Space" for menu/continue
+        // Allow tapping the canvas as "Space" ONLY for menu/continue screens.
+        // During gameplay, only the dedicated jump button should trigger Space.
         const canvas = document.getElementById('game');
         if (canvas) {
             canvas.addEventListener('touchstart', (e) => {
-                // Only act as Space if no directional controls are active
-                // This lets mobile users tap to start/continue
-                if (!this.keys.has('ArrowLeft') && !this.keys.has('ArrowRight')) {
+                // Only inject Space if game is NOT playing (menu, game over, win, leaderboard)
+                if (!this.playing) {
                     if (!this.keys.has(' ')) {
                         this.justPressedKeys.add(' ');
                     }
@@ -111,9 +112,16 @@ class Input {
             }, { passive: true });
 
             canvas.addEventListener('touchend', () => {
-                this.keys.delete(' ');
+                if (!this.playing) {
+                    this.keys.delete(' ');
+                }
             }, { passive: true });
         }
+    }
+
+    /** Call from game engine to indicate whether gameplay is active */
+    setPlaying(isPlaying) {
+        this.playing = isPlaying;
     }
 
     /** True while the key is held */

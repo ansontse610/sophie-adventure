@@ -171,6 +171,7 @@ export class Game {
             sfx.start();
             this.music.start();
             this.state = State.PLAYING;
+            input.setPlaying(true);
         }
     }
 
@@ -236,6 +237,7 @@ export class Game {
                 this.hud.addScore(timeScore);
                 this.finalScore = this.hud.score;
                 this.state = State.WIN;
+                input.setPlaying(false);
                 this.popup.show();
                 this.music.stop();
                 sfx.victory();
@@ -253,6 +255,7 @@ export class Game {
         // ── Check death ──
         if (player.lives <= 0) {
             this.state = State.GAME_OVER;
+            input.setPlaying(false);
             this.music.stop();
             sfx.gameOver();
         }
@@ -306,6 +309,7 @@ export class Game {
         this.music.start();
         this.finalScore = 0;
         this.state = State.PLAYING;
+        input.setPlaying(true);
     }
 
     // ─── DRAW ───
@@ -359,9 +363,9 @@ export class Game {
 
         // Ground
         ctx.fillStyle = COLORS.groundTop;
-        ctx.fillRect(0, 370, CANVAS_WIDTH, 80);
+        ctx.fillRect(0, 280, CANVAS_WIDTH, 170);
         ctx.fillStyle = COLORS.ground;
-        ctx.fillRect(0, 376, CANVAS_WIDTH, 74);
+        ctx.fillRect(0, 286, CANVAS_WIDTH, 164);
 
         // Clouds
         this.drawCloud(ctx, 100 + Math.sin(this.menuTimer * 0.3) * 10, 80, 1.0);
@@ -570,7 +574,7 @@ export class Game {
             const size = h.size;
             ctx.fillStyle = 'rgba(100, 180, 80, 0.35)';
             ctx.beginPath();
-            ctx.ellipse(px, 400, 120 * size, 60 * size, 0, Math.PI, 0);
+            ctx.ellipse(px, 310, 120 * size, 60 * size, 0, Math.PI, 0);
             ctx.fill();
         }
     }
